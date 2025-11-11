@@ -9,7 +9,7 @@ const Hero = () => {
   };
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background Image with Overlay */}
       <div 
         className="absolute inset-0 z-0"
@@ -32,9 +32,8 @@ const Hero = () => {
           
           {/* Main heading */}
           <h1 className="font-serif text-5xl md:text-7xl lg:text-8xl font-bold leading-tight">
-            Where Dreams
             <span className="block bg-gradient-to-r from-purple-deep via-primary to-pink-accent bg-clip-text text-transparent">
-              Meet Design
+              Ameni Zaghwani
             </span>
           </h1>
           
