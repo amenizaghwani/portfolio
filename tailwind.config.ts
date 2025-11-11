@@ -57,6 +57,17 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
+        purple: {
+          deep: "hsl(var(--purple-deep))",
+          medium: "hsl(var(--purple-medium))",
+          soft: "hsl(var(--purple-soft))",
+        },
+        lavender: "hsl(var(--lavender))",
+        "pink-accent": "hsl(var(--pink-accent))",
+      },
+      fontFamily: {
+        serif: ['Playfair Display', 'Georgia', 'serif'],
+        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
       },
       borderRadius: {
         lg: "var(--radius)",
