@@ -1,8 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { ArrowDown } from "lucide-react";
 import heroBackground from "@/assets/hero-background.jpg";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const Hero = () => {
+  const { t } = useLanguage();
+  
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     element?.scrollIntoView({ behavior: "smooth" });
@@ -25,9 +28,9 @@ const Hero = () => {
       {/* Content */}
       <div className="container mx-auto px-6 relative z-10 text-center">
         <div className="max-w-4xl mx-auto space-y-8 animate-fade-in">
-          {/* Small intro text */}
-          <p className="text-purple-medium font-medium tracking-wider uppercase text-sm">
-            Welcome to my world
+          {/* Subtitle */}
+          <p className="text-primary/90 text-lg md:text-xl font-medium mb-6 animate-fade-in">
+            {t("hero.subtitle")}
           </p>
           
           {/* Main heading */}
@@ -37,30 +40,20 @@ const Hero = () => {
             </span>
           </h1>
           
-          {/* Poetic description */}
-          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-            I'm a creator who believes in the magic of pixels, the poetry of code, 
-            and the warmth of human connection. Every project is a story waiting to unfold.
+          {/* Description */}
+          <p className="text-foreground/70 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed animate-fade-in">
+            {t("hero.description")}
           </p>
           
-          {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-6">
-            <Button 
-              size="lg" 
-              className="gradient-primary text-primary-foreground shadow-glow transition-smooth hover:scale-105 hover:shadow-glow"
-              onClick={() => scrollToSection('projects')}
-            >
-              Explore My Work
-            </Button>
-            <Button 
-              size="lg" 
-              variant="outline"
-              className="border-primary/30 hover:border-primary transition-smooth hover:shadow-soft"
-              onClick={() => scrollToSection('about')}
-            >
-              Get to Know Me
-            </Button>
-          </div>
+          {/* CTA Button */}
+          <Button 
+            size="lg" 
+            onClick={() => scrollToSection('about')}
+            className="bg-gradient-to-r from-purple-deep to-primary hover:opacity-90 text-white shadow-soft animate-fade-in"
+          >
+            {t("hero.cta")}
+            <ArrowDown className="ml-2 w-5 h-5 animate-bounce" />
+          </Button>
         </div>
       </div>
       

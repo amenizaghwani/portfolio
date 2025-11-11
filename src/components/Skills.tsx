@@ -1,132 +1,80 @@
 import { Badge } from "@/components/ui/badge";
-import { Code2, Palette, Sparkles, Zap } from "lucide-react";
+import { Code2, Palette, Wrench } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const Skills = () => {
+  const { t } = useLanguage();
+
   const skillCategories = [
     {
-      icon: <Palette className="w-6 h-6" />,
-      title: "Visual Artistry",
-      description: "Crafting beautiful interfaces with an eye for detail",
-      skills: [
-        "UI/UX Design",
-        "Visual Design",
-        "Brand Identity",
-        "Typography",
-        "Color Theory",
-        "Illustration",
-      ],
-      gradient: "from-purple-deep to-purple-medium",
+      icon: Code2,
+      title: t("skills.frontend"),
+      color: "from-purple-deep to-primary",
+      skills: ["React", "TypeScript", "Next.js", "Tailwind CSS", "Vue.js", "HTML5/CSS3"],
     },
     {
-      icon: <Code2 className="w-6 h-6" />,
-      title: "Technical Craft",
-      description: "Building robust, scalable solutions",
-      skills: [
-        "React & TypeScript",
-        "Next.js",
-        "Tailwind CSS",
-        "Node.js",
-        "REST APIs",
-        "Database Design",
-      ],
-      gradient: "from-purple-medium to-purple-soft",
+      icon: Palette,
+      title: t("skills.design"),
+      color: "from-primary to-pink-accent",
+      skills: ["Figma", "Adobe XD", "UI/UX Design", "Prototyping", "Design Systems", "Accessibility"],
     },
     {
-      icon: <Sparkles className="w-6 h-6" />,
-      title: "Creative Tools",
-      description: "Bringing ideas to life with industry-standard software",
-      skills: [
-        "Figma",
-        "Adobe Creative Suite",
-        "Framer",
-        "Webflow",
-        "Blender",
-        "After Effects",
-      ],
-      gradient: "from-purple-soft to-pink-accent",
-    },
-    {
-      icon: <Zap className="w-6 h-6" />,
-      title: "Soft Powers",
-      description: "The human touch that makes everything click",
-      skills: [
-        "Problem Solving",
-        "Team Collaboration",
-        "Communication",
-        "Project Management",
-        "Mentoring",
-        "Storytelling",
-      ],
-      gradient: "from-pink-accent to-accent",
+      icon: Wrench,
+      title: t("skills.backend"),
+      color: "from-pink-accent to-lavender",
+      skills: ["Node.js", "Python", "REST APIs", "GraphQL", "Git", "Supabase"],
     },
   ];
 
   return (
-    <section id="skills" className="py-24 bg-background">
-      <div className="container mx-auto px-6">
-        <div className="max-w-6xl mx-auto">
-          {/* Section Header */}
-          <div className="text-center mb-16 animate-fade-in">
-            <p className="text-primary font-medium tracking-wider uppercase text-sm mb-4">
-              My Toolkit
-            </p>
-            <h2 className="font-serif text-4xl md:text-5xl font-bold mb-6">
-              Skills That{" "}
-              <span className="bg-gradient-accent bg-clip-text text-transparent">
-                Spark Magic
-              </span>
-            </h2>
-            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-              A blend of artistic vision and technical mastery, 
-              cultivated through passion and endless curiosity.
-            </p>
-          </div>
+    <section id="skills" className="py-24 px-6 bg-background">
+      <div className="container mx-auto max-w-6xl">
+        {/* Header */}
+        <div className="text-center mb-16 animate-fade-in">
+          <p className="text-primary text-sm font-semibold uppercase tracking-wider mb-3">
+            {t("skills.subtitle")}
+          </p>
+          <h2 className="font-serif text-4xl md:text-5xl font-bold mb-6">
+            {t("skills.title")}
+          </h2>
+          <p className="text-foreground/70 text-lg max-w-2xl mx-auto">
+            {t("skills.description")}
+          </p>
+        </div>
 
-          {/* Skills Grid */}
-          <div className="grid md:grid-cols-2 gap-8">
-            {skillCategories.map((category, index) => (
-              <div
-                key={index}
-                className="group bg-card rounded-3xl p-8 shadow-soft border border-border/50 transition-smooth hover:shadow-medium hover:-translate-y-2"
-                style={{ animationDelay: `${index * 0.1}s` }}
-              >
-                {/* Icon & Title */}
-                <div className="flex items-start gap-4 mb-6">
-                  <div className={`p-3 rounded-xl bg-gradient-to-br ${category.gradient} text-white`}>
-                    {category.icon}
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="font-serif text-2xl font-semibold mb-2">
-                      {category.title}
-                    </h3>
-                    <p className="text-muted-foreground text-sm">
-                      {category.description}
-                    </p>
-                  </div>
-                </div>
-
-                {/* Skills Badges */}
-                <div className="flex flex-wrap gap-2">
-                  {category.skills.map((skill, skillIndex) => (
-                    <Badge
-                      key={skillIndex}
-                      variant="secondary"
-                      className="px-3 py-1.5 text-sm transition-smooth hover:bg-primary hover:text-primary-foreground"
-                    >
-                      {skill}
-                    </Badge>
-                  ))}
-                </div>
+        {/* Skills Grid */}
+        <div className="grid md:grid-cols-3 gap-8">
+          {skillCategories.map((category, index) => (
+            <div
+              key={index}
+              className="group relative bg-gradient-to-br from-background to-lavender/10 rounded-2xl p-8 shadow-soft hover:shadow-elegant transition-all duration-300 hover:-translate-y-2 animate-fade-in border border-primary/10"
+              style={{ animationDelay: `${index * 0.1}s` }}
+            >
+              {/* Icon */}
+              <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${category.color} flex items-center justify-center mb-6 shadow-soft group-hover:scale-110 transition-transform duration-300`}>
+                <category.icon className="w-8 h-8 text-white" />
               </div>
-            ))}
-          </div>
 
-          {/* Bottom Quote */}
-          <div className="mt-16 text-center">
-            <p className="font-serif text-xl italic text-muted-foreground">
-              "Mastery is not about knowing everything—it's about loving the journey of learning."
-            </p>
-          </div>
+              {/* Title */}
+              <h3 className="font-serif text-2xl font-bold mb-6">{category.title}</h3>
+
+              {/* Skills */}
+              <div className="flex flex-wrap gap-2">
+                {category.skills.map((skill, skillIndex) => (
+                  <Badge
+                    key={skillIndex}
+                    variant="outline"
+                    className="bg-background/50 border-primary/20 hover:bg-primary/10 transition-colors"
+                  >
+                    {skill}
+                  </Badge>
+                ))}
+              </div>
+
+              {/* Decorative gradient */}
+              <div className={`absolute -bottom-4 -right-4 w-24 h-24 bg-gradient-to-br ${category.color} rounded-full blur-2xl opacity-20 group-hover:opacity-30 transition-opacity`}></div>
+            </div>
+          ))}
         </div>
       </div>
     </section>

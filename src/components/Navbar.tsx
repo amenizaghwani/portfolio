@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Globe } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const Navbar = () => {
+  const { language, setLanguage, t } = useLanguage();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -22,11 +24,11 @@ const Navbar = () => {
   };
 
   const navLinks = [
-    { label: "Home", id: "hero" },
-    { label: "About", id: "about" },
-    { label: "Skills", id: "skills" },
-    { label: "Projects", id: "projects" },
-    { label: "Contact", id: "contact" },
+    { label: t("nav.home"), id: "hero" },
+    { label: t("nav.about"), id: "about" },
+    { label: t("nav.skills"), id: "skills" },
+    { label: t("nav.projects"), id: "projects" },
+    { label: t("nav.contact"), id: "contact" },
   ];
 
   return (
@@ -58,6 +60,17 @@ const Navbar = () => {
                 {link.label}
               </button>
             ))}
+            
+            {/* Language Switcher */}
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => setLanguage(language === "en" ? "fr" : "en")}
+              className="gap-2"
+            >
+              <Globe className="w-4 h-4" />
+              {language === "en" ? "FR" : "EN"}
+            </Button>
           </div>
 
           {/* Mobile Menu Button */}
@@ -87,6 +100,15 @@ const Navbar = () => {
                 {link.label}
               </button>
             ))}
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => setLanguage(language === "en" ? "fr" : "en")}
+              className="gap-2 w-full justify-start"
+            >
+              <Globe className="w-4 h-4" />
+              {language === "en" ? "Français" : "English"}
+            </Button>
           </div>
         )}
       </div>

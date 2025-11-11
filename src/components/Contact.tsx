@@ -1,155 +1,111 @@
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Mail, Send, Heart } from "lucide-react";
-import { useState } from "react";
-import { useToast } from "@/hooks/use-toast";
+import { MessageCircle, Mail, Github, Linkedin } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const Contact = () => {
-  const { toast } = useToast();
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    message: "",
-  });
+  const { t } = useLanguage();
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    toast({
-      title: "Message sent! ✨",
-      description: "Thank you for reaching out. I'll get back to you soon!",
-    });
-    setFormData({ name: "", email: "", message: "" });
+  const handleChatClick = () => {
+    // Replace with your WhatsApp number or preferred chat platform
+    window.open("https://wa.me/YOUR_PHONE_NUMBER", "_blank");
   };
 
   return (
-    <section id="contact" className="py-24 bg-background relative overflow-hidden">
-      {/* Background decoration */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent" />
-      
-      <div className="container mx-auto px-6 relative z-10">
-        <div className="max-w-4xl mx-auto">
-          {/* Section Header */}
-          <div className="text-center mb-16 animate-fade-in">
-            <p className="text-primary font-medium tracking-wider uppercase text-sm mb-4">
-              Let's Connect
-            </p>
-            <h2 className="font-serif text-4xl md:text-5xl font-bold mb-6">
-              Start a{" "}
-              <span className="bg-gradient-accent bg-clip-text text-transparent">
-                Conversation
-              </span>
-            </h2>
-            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-              Whether you have a project in mind, want to collaborate, 
-              or just fancy a chat about design—I'd love to hear from you.
-            </p>
-          </div>
+    <section id="contact" className="py-24 px-6 bg-gradient-to-b from-lavender/20 to-background">
+      <div className="container mx-auto max-w-4xl">
+        {/* Header */}
+        <div className="text-center mb-16 animate-fade-in">
+          <p className="text-primary text-sm font-semibold uppercase tracking-wider mb-3">
+            {t("contact.subtitle")}
+          </p>
+          <h2 className="font-serif text-4xl md:text-5xl font-bold mb-6">
+            {t("contact.title")}
+          </h2>
+          <p className="text-foreground/70 text-lg max-w-2xl mx-auto mb-8">
+            {t("contact.description")}
+          </p>
+        </div>
 
-          {/* Contact Form */}
-          <div className="grid md:grid-cols-3 gap-8">
-            {/* Left: Quick Info */}
-            <div className="space-y-6">
-              <div className="bg-card rounded-2xl p-6 shadow-soft border border-border/50">
-                <Mail className="w-8 h-8 text-primary mb-4" />
-                <h3 className="font-serif text-lg font-semibold mb-2">Email Me</h3>
-                <p className="text-sm text-muted-foreground mb-3">
-                  For professional inquiries and collaborations
-                </p>
-                <a
-                  href="mailto:hello@yourname.com"
-                  className="text-primary hover:text-primary/80 text-sm font-medium transition-smooth"
-                >
-                  hello@yourname.com
-                </a>
+        {/* Contact Card */}
+        <div className="bg-gradient-to-br from-purple-deep/10 to-lavender/20 rounded-2xl p-8 md:p-12 shadow-elegant animate-fade-in border border-primary/10">
+          <div className="text-center space-y-8">
+            {/* Chat Button */}
+            <div>
+              <Button
+                size="lg"
+                onClick={handleChatClick}
+                className="bg-gradient-to-r from-purple-deep to-primary hover:opacity-90 text-white shadow-soft gap-3 text-lg px-8 py-6"
+              >
+                <MessageCircle className="w-6 h-6" />
+                {t("contact.chat")}
+              </Button>
+            </div>
+
+            <div className="relative">
+              <div className="absolute inset-0 flex items-center">
+                <div className="w-full border-t border-primary/20"></div>
               </div>
-
-              <div className="bg-gradient-accent rounded-2xl p-6 text-white">
-                <Heart className="w-8 h-8 mb-4" />
-                <h3 className="font-serif text-lg font-semibold mb-2">Social Links</h3>
-                <div className="space-y-2 text-sm">
-                  <a href="#" className="block hover:opacity-80 transition-smooth">
-                    Twitter / X
-                  </a>
-                  <a href="#" className="block hover:opacity-80 transition-smooth">
-                    LinkedIn
-                  </a>
-                  <a href="#" className="block hover:opacity-80 transition-smooth">
-                    Instagram
-                  </a>
-                  <a href="#" className="block hover:opacity-80 transition-smooth">
-                    Dribbble
-                  </a>
-                </div>
+              <div className="relative flex justify-center text-sm">
+                <span className="bg-gradient-to-br from-purple-deep/10 to-lavender/20 px-4 text-foreground/60">
+                  or
+                </span>
               </div>
             </div>
 
-            {/* Right: Contact Form */}
-            <div className="md:col-span-2">
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid sm:grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <label htmlFor="name" className="text-sm font-medium text-foreground">
-                      Your Name
-                    </label>
-                    <Input
-                      id="name"
-                      placeholder="Jane Doe"
-                      value={formData.name}
-                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      required
-                      className="bg-card border-border/50 focus:border-primary transition-smooth"
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <label htmlFor="email" className="text-sm font-medium text-foreground">
-                      Email Address
-                    </label>
-                    <Input
-                      id="email"
-                      type="email"
-                      placeholder="jane@example.com"
-                      value={formData.email}
-                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      required
-                      className="bg-card border-border/50 focus:border-primary transition-smooth"
-                    />
-                  </div>
-                </div>
+            {/* Email */}
+            <div className="flex items-center justify-center gap-3 text-foreground/80">
+              <Mail className="w-5 h-5 text-primary" />
+              <span className="text-lg">{t("contact.email")}:</span>
+              <a
+                href="mailto:your.email@example.com"
+                className="text-primary hover:underline font-medium"
+              >
+                your.email@example.com
+              </a>
+            </div>
 
-                <div className="space-y-2">
-                  <label htmlFor="message" className="text-sm font-medium text-foreground">
-                    Your Message
-                  </label>
-                  <Textarea
-                    id="message"
-                    placeholder="Tell me about your project, ideas, or just say hi! ✨"
-                    value={formData.message}
-                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    required
-                    rows={6}
-                    className="bg-card border-border/50 focus:border-primary transition-smooth resize-none"
-                  />
-                </div>
-
+            {/* Social Links */}
+            <div className="pt-6">
+              <p className="text-foreground/60 mb-4">{t("contact.social")}</p>
+              <div className="flex justify-center gap-4">
                 <Button
-                  type="submit"
-                  size="lg"
-                  className="w-full gradient-primary text-primary-foreground shadow-glow transition-smooth hover:scale-105 gap-2"
+                  variant="outline"
+                  size="icon"
+                  className="rounded-full border-primary/30 hover:bg-primary/10"
+                  asChild
                 >
-                  <Send className="w-4 h-4" />
-                  Send Message
+                  <a
+                    href="https://github.com/yourusername"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="GitHub"
+                  >
+                    <Github className="w-5 h-5" />
+                  </a>
                 </Button>
-              </form>
+                <Button
+                  variant="outline"
+                  size="icon"
+                  className="rounded-full border-primary/30 hover:bg-primary/10"
+                  asChild
+                >
+                  <a
+                    href="https://linkedin.com/in/yourusername"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="LinkedIn"
+                  >
+                    <Linkedin className="w-5 h-5" />
+                  </a>
+                </Button>
+              </div>
             </div>
           </div>
+        </div>
 
-          {/* Bottom Note */}
-          <div className="mt-16 text-center">
-            <p className="font-serif text-xl italic text-muted-foreground">
-              "Every great project begins with a simple conversation."
-            </p>
-          </div>
+        {/* Closing Quote */}
+        <div className="text-center italic text-foreground/60 text-lg font-serif mt-12 animate-fade-in">
+          "{t("contact.quote")}"
         </div>
       </div>
     </section>

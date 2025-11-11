@@ -1,138 +1,124 @@
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import { ExternalLink, Github } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const Projects = () => {
+  const { t } = useLanguage();
+
   const projects = [
     {
-      title: "Dreamscape",
-      category: "Web Experience",
-      description: "An immersive storytelling platform where narratives come alive through interactive design and fluid animations.",
-      tags: ["React", "Three.js", "GSAP", "Design"],
-      gradient: "from-purple-deep/20 to-purple-medium/20",
-      textGradient: "from-purple-deep to-purple-medium",
+      title: "E-Commerce Platform",
+      category: "Web Development",
+      description: "A modern, responsive e-commerce platform with seamless checkout experience and real-time inventory management.",
+      tags: ["React", "Node.js", "Stripe", "MongoDB"],
+      gradient: "from-purple-deep to-primary",
+      link: "#",
+      github: "#",
     },
     {
-      title: "Harmony Hub",
-      category: "Mobile App",
-      description: "A wellness companion that blends mindfulness practices with beautiful UI to help users find their daily balance.",
-      tags: ["React Native", "UI/UX", "Animation", "Wellness"],
-      gradient: "from-purple-medium/20 to-purple-soft/20",
-      textGradient: "from-purple-medium to-purple-soft",
+      title: "Design System",
+      category: "UI/UX Design",
+      description: "Comprehensive design system with reusable components, ensuring consistency across all digital products.",
+      tags: ["Figma", "React", "Storybook", "Tailwind"],
+      gradient: "from-primary to-pink-accent",
+      link: "#",
+      github: "#",
     },
     {
-      title: "Canvas & Code",
-      category: "Creative Tool",
-      description: "A digital art platform that bridges the gap between traditional artistry and modern technology.",
-      tags: ["Next.js", "WebGL", "Design System", "Art"],
-      gradient: "from-purple-soft/20 to-pink-accent/20",
-      textGradient: "from-purple-soft to-pink-accent",
-    },
-    {
-      title: "Lumina",
-      category: "Brand Identity",
-      description: "Complete brand redesign for a sustainable fashion startup, telling their story through visual language.",
-      tags: ["Branding", "Figma", "Web Design", "Motion"],
-      gradient: "from-pink-accent/20 to-accent/20",
-      textGradient: "from-pink-accent to-accent",
+      title: "AI-Powered Dashboard",
+      category: "Full Stack",
+      description: "Analytics dashboard with AI-driven insights, helping businesses make data-driven decisions.",
+      tags: ["Next.js", "Python", "TensorFlow", "PostgreSQL"],
+      gradient: "from-pink-accent to-lavender",
+      link: "#",
+      github: "#",
     },
   ];
 
   return (
-    <section id="projects" className="py-24 gradient-soft">
-      <div className="container mx-auto px-6">
-        <div className="max-w-6xl mx-auto">
-          {/* Section Header */}
-          <div className="text-center mb-16 animate-fade-in">
-            <p className="text-primary font-medium tracking-wider uppercase text-sm mb-4">
-              Featured Work
-            </p>
-            <h2 className="font-serif text-4xl md:text-5xl font-bold mb-6">
-              Stories I've{" "}
-              <span className="bg-gradient-accent bg-clip-text text-transparent">
-                Brought to Life
-              </span>
-            </h2>
-            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-              Each project is a labor of love, crafted with intention and care. 
-              Here are some of my favorite creations.
-            </p>
-          </div>
+    <section id="projects" className="py-24 px-6 bg-gradient-to-b from-background to-lavender/20">
+      <div className="container mx-auto max-w-6xl">
+        {/* Header */}
+        <div className="text-center mb-16 animate-fade-in">
+          <p className="text-primary text-sm font-semibold uppercase tracking-wider mb-3">
+            {t("projects.subtitle")}
+          </p>
+          <h2 className="font-serif text-4xl md:text-5xl font-bold mb-6">
+            {t("projects.title")}
+          </h2>
+          <p className="text-foreground/70 text-lg max-w-2xl mx-auto">
+            {t("projects.description")}
+          </p>
+        </div>
 
-          {/* Projects Grid */}
-          <div className="grid md:grid-cols-2 gap-8 mb-12">
-            {projects.map((project, index) => (
-              <div
-                key={index}
-                className={`group relative bg-gradient-to-br ${project.gradient} rounded-3xl p-8 border border-border/50 shadow-soft transition-smooth hover:shadow-medium hover:-translate-y-2 overflow-hidden`}
-                style={{ animationDelay: `${index * 0.1}s` }}
-              >
-                {/* Background decoration */}
-                <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-primary/5 to-transparent rounded-full blur-3xl -z-0" />
-                
-                <div className="relative z-10">
-                  {/* Category */}
-                  <p className="text-primary font-medium text-sm mb-3">
+        {/* Projects Grid */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {projects.map((project, index) => (
+            <div
+              key={index}
+              className="group relative bg-background rounded-2xl overflow-hidden shadow-soft hover:shadow-elegant transition-all duration-300 hover:-translate-y-2 animate-fade-in border border-primary/10"
+              style={{ animationDelay: `${index * 0.1}s` }}
+            >
+              {/* Gradient Header */}
+              <div className={`h-32 bg-gradient-to-br ${project.gradient} relative overflow-hidden`}>
+                <div className="absolute inset-0 bg-black/20"></div>
+                <div className="absolute top-4 left-4">
+                  <Badge variant="secondary" className="bg-white/20 text-white border-0">
                     {project.category}
-                  </p>
-
-                  {/* Title */}
-                  <h3 className={`font-serif text-3xl font-bold mb-4 bg-gradient-to-r ${project.textGradient} bg-clip-text text-transparent`}>
-                    {project.title}
-                  </h3>
-
-                  {/* Description */}
-                  <p className="text-foreground/80 leading-relaxed mb-6">
-                    {project.description}
-                  </p>
-
-                  {/* Tags */}
-                  <div className="flex flex-wrap gap-2 mb-6">
-                    {project.tags.map((tag, tagIndex) => (
-                      <span
-                        key={tagIndex}
-                        className="px-3 py-1 bg-background/60 backdrop-blur-sm rounded-full text-xs font-medium text-foreground/70"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-
-                  {/* Actions */}
-                  <div className="flex gap-3">
-                    <Button
-                      size="sm"
-                      variant="outline"
-                      className="gap-2 border-primary/30 hover:border-primary transition-smooth"
-                    >
-                      <ExternalLink className="w-4 h-4" />
-                      View Project
-                    </Button>
-                    <Button
-                      size="sm"
-                      variant="ghost"
-                      className="gap-2 hover:bg-primary/10"
-                    >
-                      <Github className="w-4 h-4" />
-                      Code
-                    </Button>
-                  </div>
+                  </Badge>
                 </div>
               </div>
-            ))}
-          </div>
 
-          {/* Call to Action */}
-          <div className="text-center">
-            <p className="text-muted-foreground mb-6">
-              Curious to see more? I'm always working on something new.
-            </p>
-            <Button
-              size="lg"
-              className="gradient-primary text-primary-foreground shadow-glow transition-smooth hover:scale-105"
-            >
-              View All Projects
-            </Button>
-          </div>
+              {/* Content */}
+              <div className="p-6">
+                <h3 className="font-serif text-2xl font-bold mb-3">{project.title}</h3>
+                <p className="text-foreground/70 mb-4 line-clamp-3">{project.description}</p>
+
+                {/* Tags */}
+                <div className="flex flex-wrap gap-2 mb-6">
+                  {project.tags.map((tag, tagIndex) => (
+                    <Badge
+                      key={tagIndex}
+                      variant="outline"
+                      className="bg-lavender/20 border-primary/20 text-xs"
+                    >
+                      {tag}
+                    </Badge>
+                  ))}
+                </div>
+
+                {/* Action Buttons */}
+                <div className="flex gap-3">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="flex-1 gap-2 border-primary/30 hover:bg-primary/10"
+                    asChild
+                  >
+                    <a href={project.link} target="_blank" rel="noopener noreferrer">
+                      <ExternalLink className="w-4 h-4" />
+                      {t("projects.viewProject")}
+                    </a>
+                  </Button>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="gap-2"
+                    asChild
+                  >
+                    <a href={project.github} target="_blank" rel="noopener noreferrer">
+                      <Github className="w-4 h-4" />
+                      {t("projects.viewCode")}
+                    </a>
+                  </Button>
+                </div>
+              </div>
+
+              {/* Decorative gradient */}
+              <div className={`absolute -bottom-12 -right-12 w-32 h-32 bg-gradient-to-br ${project.gradient} rounded-full blur-3xl opacity-20 group-hover:opacity-30 transition-opacity`}></div>
+            </div>
+          ))}
         </div>
       </div>
     </section>
