@@ -1,6 +1,4 @@
-import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { ExternalLink, Github } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const Projects = () => {
@@ -76,7 +74,7 @@ const Projects = () => {
                 <p className="text-foreground/70 mb-4 line-clamp-3">{project.description}</p>
 
                 {/* Tags */}
-                <div className="flex flex-wrap gap-2 mb-6">
+                <div className="flex flex-wrap gap-2">
                   {project.tags.map((tag, tagIndex) => (
                     <Badge
                       key={tagIndex}
@@ -86,32 +84,6 @@ const Projects = () => {
                       {tag}
                     </Badge>
                   ))}
-                </div>
-
-                {/* Action Buttons */}
-                <div className="flex gap-3">
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    className="flex-1 gap-2 border-primary/30 hover:bg-primary/10"
-                    asChild
-                  >
-                    <a href={project.link} target="_blank" rel="noopener noreferrer">
-                      <ExternalLink className="w-4 h-4" />
-                      {t("projects.viewProject")}
-                    </a>
-                  </Button>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    className="gap-2"
-                    asChild
-                  >
-                    <a href={project.github} target="_blank" rel="noopener noreferrer">
-                      <Github className="w-4 h-4" />
-                      {t("projects.viewCode")}
-                    </a>
-                  </Button>
                 </div>
               </div>
 
